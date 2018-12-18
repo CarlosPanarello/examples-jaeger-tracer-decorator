@@ -1,4 +1,21 @@
 import { Parent } from "./parent";
+import { JaegerTracer, IJaegerOptions } from "jaeger-tracer-decorator";
+
+const optionsJaeger: IJaegerOptions = {
+  serviceName: "Basic_Typescript",
+  serviceVersion: "2.0.0",
+  disable: false,
+  sampler: {
+    type: "const",
+    param: 1,
+  },
+  reporter: {
+    logSpans: true,
+    agentHost: "jaeger",
+    agentPort: 6832,
+  },
+};
+const jaegerTracer = new JaegerTracer(undefined, undefined, optionsJaeger);
 
 const parent = new Parent("Homer","Simpson","Bart");
 

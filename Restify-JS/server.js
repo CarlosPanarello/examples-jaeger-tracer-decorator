@@ -1,7 +1,10 @@
 'use strict';
 const restify = require('restify');
 var Controller = require("./controller.js")
+var JaegerTracer = require("jaeger-tracer-decorator").JaegerTracer;
+var middlewareTracer = require("jaeger-tracer-decorator").middlewareTracer;
 
+const jaegerTracer = new JaegerTracer();
 /**
   * Initialize Server
   */
@@ -16,6 +19,7 @@ const server = restify.createServer({
 
  server.use(restify.plugins.queryParser());
  server.use(restify.plugins.bodyParser());
+ server.use(middlewareTracer({tracer: jaegerTracer.tracer}))
  
 /**
  * Routers

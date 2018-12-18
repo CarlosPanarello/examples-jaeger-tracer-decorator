@@ -1,7 +1,9 @@
 "use strict";
-
+require('dotenv').config()
 var Parent = require("./parent");
+var JaegerTracer = require("jaeger-tracer-decorator").JaegerTracer;
 
+const jaegerTracer = new JaegerTracer();
 const parent = new Parent("Homer","Simpson","Bart");
 
 setInterval(() => {

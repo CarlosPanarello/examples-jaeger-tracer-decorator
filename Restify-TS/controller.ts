@@ -12,6 +12,7 @@ export class Controller {
   }
 
   receive(req: any) {
+    this.fakeProcess();
     this.myTag = req.query.value;
     this.internal.myOtherMethod();
     return req.query.value + " receive";
@@ -19,6 +20,7 @@ export class Controller {
 
   async send(req: any) {
     try {
+      this.fakeProcess();
       const headers = this.mygetHeaderSpan;
       const opts = { timeout: 3000, headers};
       this.myTag = req.query.value;
@@ -30,4 +32,16 @@ export class Controller {
       throw error;
     }
   }
+  private getRandomInt(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  private fakeProcess(){
+    let limit = this.getRandomInt(100000, 10000000);
+    while(limit) {
+      limit--;
+    }
+  }  
 }
