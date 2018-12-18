@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "Basic-JS"
+		},
+		{
+			"path": "Basic-TS"
+		},
+		{
+			"path": "Express-JS"
+		},
+		{
+			"path": "Express-TS"
+		},
+		{
+			"path": "Restify-JS"
+		},
+		{
+			"path": "Restify-TS"
+		}
+	]
+}

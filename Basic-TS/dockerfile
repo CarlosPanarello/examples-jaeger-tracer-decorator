@@ -1,0 +1,7 @@
+FROM node:10-alpine as Basic_TS
+
+WORKDIR /app
+
+COPY ./* 			/app/
+
+CMD [ "node", "./dist/index.js" ]

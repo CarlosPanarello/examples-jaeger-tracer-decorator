@@ -1,0 +1,18 @@
+{
+  "name": "restify-js",
+  "version": "1.0.0",
+  "description": "Example of using jaeger tracer decorator with restify",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm install && node ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlos E Panarello",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "restify": "^7.3.0",
+    "restify-errors": "^6.1.1",
+    "restify-plugins": "^1.6.0"
+  }
+}

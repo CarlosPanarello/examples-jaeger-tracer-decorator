@@ -1,0 +1,23 @@
+{
+  "name": "restify-ts",
+  "version": "1.0.0",
+  "description": "Example of using jaeger tracer decorator with restify and typescript",
+  "main": "dist/server.js",
+  "scripts": {
+    "type": "node_modules/.bin/tsc",
+    "start": "npm install && npm run type && node ./dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlos E Panarello",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/restify": "^7.2.6",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "restify": "^7.3.0",
+    "restify-errors": "^6.1.1",
+    "restify-plugins": "^1.6.0"
+  }
+}

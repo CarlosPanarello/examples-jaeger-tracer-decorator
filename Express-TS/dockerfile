@@ -1,0 +1,9 @@
+FROM node:10-alpine as Express_TS
+
+WORKDIR /app
+
+COPY ./* 			/app/
+
+EXPOSE 4002
+
+CMD [ "node", "./dist/index.js" ]

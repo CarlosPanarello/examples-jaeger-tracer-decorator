@@ -1,0 +1,10 @@
+FROM node:10-alpine as Restify_JS
+
+WORKDIR /app
+
+COPY ./* 			/app/
+
+EXPOSE 3001
+#ENTRYPOINT [ "/bin/sh", "-c", "while true; do sleep 1; done"]
+
+CMD [ "node", "./server.js" ]

@@ -1,0 +1,16 @@
+{
+  "name": "basic-ts",
+  "version": "1.0.0",
+  "description": "Basic example of using jaeger tracer decorator with typescript",
+  "main": "dist/index.js",
+  "scripts": {
+    "type": "node_modules/.bin/tsc",
+    "start": "npm install  && npm run type &&  node ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlos E Panarello",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
+}

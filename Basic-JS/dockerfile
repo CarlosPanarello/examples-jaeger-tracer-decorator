@@ -1,0 +1,8 @@
+FROM node:10-alpine as Basic_JS
+
+WORKDIR /app
+
+COPY ./* 			/app/
+
+#ENTRYPOINT [ "/bin/sh", "-c", "while true; do sleep 1; done"]
+CMD [ "node", "./index.js" ]
