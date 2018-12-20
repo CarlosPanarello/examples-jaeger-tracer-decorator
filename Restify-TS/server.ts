@@ -25,7 +25,7 @@ const transformPathInSpanName: TransformPathInSpanName = (path: string) => {
   }
 };
 
-const requestTags: RequestTags[] = ["id", "headers"];
+const requestTags: RequestTags[] = ["id","params", "headers"];
 
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
@@ -36,6 +36,12 @@ server.use(middlewareTracer({tracer: jaegerTracer.tracer, requestTags ,endpointF
  * Routers
  * */
 server.get('/receive', (req: any, res: any, next: any) => {
+  const ctrl = new Controller();
+  res.send(ctrl.receive(req));
+  next();
+});
+
+server.get('/receive/:valorReceive', (req: any, res: any, next: any) => {
   const ctrl = new Controller();
   res.send(ctrl.receive(req));
   next();

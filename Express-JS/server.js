@@ -6,12 +6,28 @@ var Controller = require("./controller.js")
 var JaegerTracer = require("jaeger-tracer-decorator").JaegerTracer;
 var middlewareTracer = require("jaeger-tracer-decorator").middlewareTracer;
 
-const jaegerTracer = new JaegerTracer();
+const optionsJaeger = {
+  serviceName: "Express_JS",
+  serviceVersion: "2.0.0",
+  disable: false,
+  sampler: {
+    type: "const",
+    param: 1,
+  },
+  reporter: {
+    logSpans: true,
+    agentHost: "jaeger",
+    agentPort: 6832,
+  },
+};
+const jaegerTracer = new JaegerTracer(undefined, undefined, optionsJaeger);
 /**
   * Initialize Server
   */
 const server = express();
-const requestTags = ["query", "headers"];
+var router = express.Router();
+
+const requestTags = ["query","params", "headers"];
 const transformPathInSpanName = (path) => {
   switch (true) {
     case path.startsWith("/receive"):
@@ -22,12 +38,12 @@ const transformPathInSpanName = (path) => {
       return path;
   }
 };
+router.use(middlewareTracer({tracer: jaegerTracer.tracer, requestTags, transformPathInSpanName }));
 
 /**
  * Routers
  * */
-server.get('/receive', 
-  middlewareTracer({tracer: jaegerTracer.tracer, requestTags, transformPathInSpanName }),
+router.get('/receive',
   (req, res, next) => {
     const ctrl = new Controller();
     res.send(ctrl.receive(req));
@@ -35,8 +51,18 @@ server.get('/receive',
   }
 );
 
-server.get('/send', 
-  middlewareTracer({tracer: jaegerTracer.tracer, requestTags, transformPathInSpanName }),
+/**
+ * Routers
+ * */
+router.get('/receive/:valorReceive', 
+  (req, res, next) => {
+    const ctrl = new Controller();
+    res.send(ctrl.receive(req));
+    next();
+  }
+);
+
+router.get('/send', 
   (req, res, next) => {
     const ctrl = new Controller();
     ctrl.send(req).then((result) => {
@@ -47,6 +73,8 @@ server.get('/send',
     });
   }
 );
+
+server.use('/', router);
 
 /**
   * Start Server
