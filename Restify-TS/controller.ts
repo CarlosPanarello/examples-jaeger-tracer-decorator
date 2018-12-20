@@ -1,9 +1,15 @@
 import Axios from "axios";
 import { InternalController } from "./internal.controller";
+import { traceable, getHeaderSpan, setTagSpan } from "jaeger-tracer-decorator";
 
+@traceable()
 export class Controller {
   public internal: InternalController;
+  
+  @setTagSpan()
   public myTag: string;
+  
+  @getHeaderSpan()
   public mygetHeaderSpan: any;
 
   constructor() {
@@ -11,6 +17,7 @@ export class Controller {
     this.internal = new InternalController();
   }
 
+  @traceable()
   receive(req: any) {
     this.fakeProcess();
     this.myTag = req.query.value;
@@ -18,6 +25,7 @@ export class Controller {
     return req.query.value + " receive";
   }
 
+  @traceable()
   async send(req: any) {
     try {
       this.fakeProcess();
@@ -32,6 +40,7 @@ export class Controller {
       throw error;
     }
   }
+
   private getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);

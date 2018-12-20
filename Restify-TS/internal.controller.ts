@@ -1,12 +1,18 @@
+import { traceable, getHeaderSpan, setTagSpan } from "jaeger-tracer-decorator";
+
+@traceable()
 export class InternalController {
 
   constructor() {
   }
 
+  @traceable()
   public myOtherMethod() {
     this.fakeProcess();
     return "InternalController";
   }
+
+  @traceable()
   private getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
