@@ -18,6 +18,6 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "jaeger-tracer-decorator": "^2.0.2"
+    "jaeger-tracer-decorator": "^2.0.3"
   }
 }
